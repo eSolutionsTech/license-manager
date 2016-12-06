@@ -28,21 +28,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class ObjectSerializationException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "An I/O error occurred while writing the object to the byte array.";
 
     public ObjectSerializationException() {
-        super("An I/O error occurred while writing the object to the byte array.");
+        super(MESSAGE);
     }
 
-    public ObjectSerializationException(String message) {
+    public ObjectSerializationException(final String message) {
         super(message);
     }
 
-    public ObjectSerializationException(Throwable cause) {
-        super("An I/O error occurred while writing the object to the byte array.", cause);
+    public ObjectSerializationException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public ObjectSerializationException(String message, Throwable cause) {
+    public ObjectSerializationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

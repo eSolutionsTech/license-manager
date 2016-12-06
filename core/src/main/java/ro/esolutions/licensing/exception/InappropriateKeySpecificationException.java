@@ -28,21 +28,21 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class InappropriateKeySpecificationException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+    private static final String MESSAGE = "The specified key specification is inappropriate for the factory.";
 
     public InappropriateKeySpecificationException() {
-        super("The specified key specification is inappropriate for the factory.");
+        super(MESSAGE);
     }
 
-    public InappropriateKeySpecificationException(String message) {
+    public InappropriateKeySpecificationException(final String message) {
         super(message);
     }
 
-    public InappropriateKeySpecificationException(Throwable cause) {
-        super("The specified key specification is inappropriate for the factory.", cause);
+    public InappropriateKeySpecificationException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public InappropriateKeySpecificationException(String message, Throwable cause) {
+    public InappropriateKeySpecificationException(final String message,final Throwable cause) {
         super(message, cause);
     }
 }

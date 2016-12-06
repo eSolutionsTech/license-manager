@@ -18,25 +18,16 @@
 
 package ro.esolutions.licensing;
 
-import java.lang.reflect.AnnotatedElement;
-import java.security.PublicKey;
-import java.util.Arrays;
-import java.util.Hashtable;
-
 import ro.esolutions.licensing.encryption.Encryptor;
 import ro.esolutions.licensing.encryption.KeyFileUtilities;
 import ro.esolutions.licensing.encryption.PasswordProvider;
 import ro.esolutions.licensing.encryption.PublicKeyDataProvider;
-import ro.esolutions.licensing.exception.AlgorithmNotSupportedException;
-import ro.esolutions.licensing.exception.CorruptSignatureException;
-import ro.esolutions.licensing.exception.FailedToDecryptException;
-import ro.esolutions.licensing.exception.InappropriateKeyException;
-import ro.esolutions.licensing.exception.InappropriateKeySpecificationException;
-import ro.esolutions.licensing.exception.InsecureEnvironmentException;
-import ro.esolutions.licensing.exception.InvalidLicenseException;
-import ro.esolutions.licensing.exception.InvalidSignatureException;
-import ro.esolutions.licensing.exception.KeyNotFoundException;
-import ro.esolutions.licensing.exception.ObjectTypeNotExpectedException;
+import ro.esolutions.licensing.exception.*;
+
+import java.lang.reflect.AnnotatedElement;
+import java.security.PublicKey;
+import java.util.Arrays;
+import java.util.Hashtable;
 
 /**
  * This class manages licenses in the client application. All interaction with the license manager done from the client
@@ -76,19 +67,19 @@ public final class LicenseManager {
     private final Hashtable<Object, LicenseCacheEntry> licenseCache = new Hashtable<>();
 
     private LicenseManager() {
-        if (LicenseManagerProperties.getLicenseProvider() == null)
+        if (LicenseManagerProperties.getLicenseProvider() == null) {
             throw new IllegalArgumentException("Parameter licenseProvider must not be null.");
-
-        if (LicenseManagerProperties.getPublicKeyDataProvider() == null)
+        }
+        if (LicenseManagerProperties.getPublicKeyDataProvider() == null) {
             throw new IllegalArgumentException("Parameter publicKeyDataProvider must not be null.");
-
-        if (LicenseManagerProperties.getPublicKeyPasswordProvider() == null)
+        }
+        if (LicenseManagerProperties.getPublicKeyPasswordProvider() == null) {
             throw new IllegalArgumentException("Parameter publicKeyPasswordProvider must not be null.");
-
+        }
         // install the security manager
         try {
             Class.forName("ro.esolutions.licensing.LicenseSecurityManager");
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             throw new InsecureEnvironmentException("The class ro.esolutions.licensing.LicenseSecurityManager could not be initialized.", e);
         }
 
@@ -124,13 +115,14 @@ public final class LicenseManager {
         return LicenseManager.instance;
     }
 
-    public final void validateLicense(License license) throws InvalidLicenseException {
-        if (this.licenseValidator != null)
+    public final void validateLicense(final License license) throws InvalidLicenseException {
+        if (this.licenseValidator != null) {
             this.licenseValidator.validateLicense(license);
+        }
     }
 
-    public final boolean hasLicenseForFeature(Object context, String featureName) throws InvalidLicenseException {
-        License license = this.getLicense(context);
+    public final boolean hasLicenseForFeature(final Object context, final String featureName) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
         if (license == null)
             return false;
 
@@ -139,13 +131,13 @@ public final class LicenseManager {
         return license.hasLicenseForFeature(featureName);
     }
 
-    public final boolean hasLicenseForFeature(Object context, Feature feature) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+    public final boolean hasLicenseForFeature(final Object context, final Feature feature) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
+        }
 
         this.validateLicense(license);
-
         return license.hasLicenseForFeature(feature);
     }
 
@@ -159,13 +151,13 @@ public final class LicenseManager {
      * @throws InvalidLicenseException                                   when the license is invalid for any reason.
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
-    public final boolean hasLicenseForAnyFeature(Object context, String... featureNames) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+    public final boolean hasLicenseForAnyFeature(final Object context, final String... featureNames) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
+        }
 
         this.validateLicense(license);
-
         return license.hasLicenseForAnyFeature(featureNames);
     }
 
@@ -179,13 +171,13 @@ public final class LicenseManager {
      * @throws InvalidLicenseException                                   when the license is invalid for any reason.
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
-    public final boolean hasLicenseForAnyFeature(Object context, Feature... features) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+    public final boolean hasLicenseForAnyFeature(final Object context, final Feature... features) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
+        }
 
         this.validateLicense(license);
-
         return license.hasLicenseForAnyFeature(features);
     }
 
@@ -199,13 +191,13 @@ public final class LicenseManager {
      * @throws InvalidLicenseException                                   when the license is invalid for any reason.
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
-    public final boolean hasLicenseForAllFeatures(Object context, String... featureNames) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+    public final boolean hasLicenseForAllFeatures(final Object context, final String... featureNames) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
+        }
 
         this.validateLicense(license);
-
         return license.hasLicenseForAllFeatures(featureNames);
     }
 
@@ -220,12 +212,12 @@ public final class LicenseManager {
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
     public final boolean hasLicenseForAllFeatures(final Object context, final Feature... features) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
+        }
 
         this.validateLicense(license);
-
         return license.hasLicenseForAllFeatures(features);
     }
 
@@ -241,10 +233,10 @@ public final class LicenseManager {
      */
     public final boolean hasLicenseForFeatures(final Object context, final FeatureRestriction annotation)
             throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
-
+        }
         this.validateLicense(license);
 
         return annotation.operand() == FeatureRestrictionOperand.AND ?
@@ -267,14 +259,13 @@ public final class LicenseManager {
      * @throws InvalidLicenseException                                   when the license is invalid for any reason.
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
-    public final boolean hasLicenseForFeatures(Object context, AnnotatedElement target) throws InvalidLicenseException {
-        License license = this.getLicense(context);
-        if (license == null)
+    public final boolean hasLicenseForFeatures(final Object context, final AnnotatedElement target) throws InvalidLicenseException {
+        final License license = this.getLicense(context);
+        if (license == null) {
             return false;
-
+        }
         this.validateLicense(license);
-
-        FeatureRestriction annotation = target.getAnnotation(FeatureRestriction.class);
+        final FeatureRestriction annotation = target.getAnnotation(FeatureRestriction.class);
 
         return annotation == null || (
                 annotation.operand() == FeatureRestrictionOperand.AND ?
@@ -310,14 +301,14 @@ public final class LicenseManager {
      * @throws FailedToDecryptException               if the license or signature could not be decrypted.
      * @throws ObjectTypeNotExpectedException         if the license data was tampered with.
      */
-    public final License getLicense(Object context) throws KeyNotFoundException, AlgorithmNotSupportedException,
-            InappropriateKeySpecificationException,
-            InappropriateKeyException, CorruptSignatureException,
+    public final License getLicense(final Object context) throws KeyNotFoundException, AlgorithmNotSupportedException,
+            InappropriateKeySpecificationException, InappropriateKeyException, CorruptSignatureException,
             InvalidSignatureException, FailedToDecryptException {
-        if (context == null)
+        if (context == null) {
             throw new IllegalArgumentException("License context cannot be null.");
+        }
 
-        long time = System.currentTimeMillis();
+        final long time = System.currentTimeMillis();
 
         LicenseCacheEntry entry;
 
@@ -336,11 +327,11 @@ public final class LicenseManager {
                 if (signedLicense == null)
                     return null;
 
-                License license = this.decryptAndVerifyLicense(signedLicense);
+                final License license = this.decryptAndVerifyLicense(signedLicense);
 
                 signedLicense.erase();
 
-                long expires = time + this.cacheTimeInMilliseconds;
+                final long expires = time + this.cacheTimeInMilliseconds;
 
                 entry = new LicenseCacheEntry(license, expires);
 
@@ -375,13 +366,12 @@ public final class LicenseManager {
      * @throws CorruptSignatureException      if the signature data has been corrupted (most likely tampered with).
      * @throws InvalidSignatureException      if the signature is invalid (most likely tampered with).
      */
-    public final void verifyLicenseSignature(SignedLicense signedLicense)
-            throws AlgorithmNotSupportedException, InappropriateKeyException, CorruptSignatureException,
-            InvalidSignatureException {
+    public final void verifyLicenseSignature(final SignedLicense signedLicense) throws AlgorithmNotSupportedException,
+            InappropriateKeyException, CorruptSignatureException, InvalidSignatureException {
         PublicKey key;
         {
-            char[] password = this.publicKeyPasswordProvider.getPassword();
-            byte[] keyData = this.publicKeyDataProvider.getEncryptedPublicKeyData();
+            final char[] password = this.publicKeyPasswordProvider.getPassword();
+            final byte[] keyData = this.publicKeyDataProvider.getEncryptedPublicKeyData();
 
             key = KeyFileUtilities.readEncryptedPublicKey(keyData, password);
 
@@ -411,15 +401,15 @@ public final class LicenseManager {
      * @throws InvalidSignatureException      if the signature is invalid (most likely tampered with).
      * @throws FailedToDecryptException       if the license could not be decrypted.
      */
-    public final License decryptAndVerifyLicense(SignedLicense signedLicense) {
+    public final License decryptAndVerifyLicense(final SignedLicense signedLicense) {
         License license;
         {
             byte[] unencrypted;
             {
                 this.verifyLicenseSignature(signedLicense);
 
-                char[] password = this.licensePasswordProvider.getPassword();
-                byte[] encrypted = signedLicense.getLicenseContent();
+                final char[] password = this.licensePasswordProvider.getPassword();
+                final byte[] encrypted = signedLicense.getLicenseContent();
 
                 unencrypted = Encryptor.decryptRaw(encrypted, password);
 
@@ -442,7 +432,7 @@ public final class LicenseManager {
 
         private final long expires;
 
-        public LicenseCacheEntry(License license, long expires) {
+        public LicenseCacheEntry(final License license,final long expires) {
             this.license = license;
             this.expires = expires;
         }

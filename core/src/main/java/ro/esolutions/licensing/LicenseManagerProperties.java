@@ -51,7 +51,7 @@ public final class LicenseManagerProperties {
      * @param publicKeyDataProvider The provider of the data for the public key companion to the private key used to
      *                              sign the license object
      */
-    public static void setPublicKeyDataProvider(PublicKeyDataProvider publicKeyDataProvider) {
+    public static void setPublicKeyDataProvider(final PublicKeyDataProvider publicKeyDataProvider) {
         LicenseManagerProperties.publicKeyDataProvider = publicKeyDataProvider;
     }
 
@@ -66,7 +66,7 @@ public final class LicenseManagerProperties {
      *
      * @param publicKeyPasswordProvider The provider of the password for decrypting the public key
      */
-    public static void setPublicKeyPasswordProvider(PasswordProvider publicKeyPasswordProvider) {
+    public static void setPublicKeyPasswordProvider(final PasswordProvider publicKeyPasswordProvider) {
         LicenseManagerProperties.publicKeyPasswordProvider = publicKeyPasswordProvider;
     }
 
@@ -81,7 +81,7 @@ public final class LicenseManagerProperties {
      *
      * @param licenseProvider The provider of the persisted license data
      */
-    public static void setLicenseProvider(LicenseProvider licenseProvider) {
+    public static void setLicenseProvider(final LicenseProvider licenseProvider) {
         LicenseManagerProperties.licenseProvider = licenseProvider;
     }
 
@@ -98,7 +98,7 @@ public final class LicenseManagerProperties {
      *
      * @param licensePasswordProvider The provider of the password for decrypting license data
      */
-    public static void setLicensePasswordProvider(PasswordProvider licensePasswordProvider) {
+    public static void setLicensePasswordProvider(final PasswordProvider licensePasswordProvider) {
         LicenseManagerProperties.licensePasswordProvider = licensePasswordProvider;
     }
 
@@ -116,7 +116,7 @@ public final class LicenseManagerProperties {
      * @param licenseValidator The validator implementation that validates all licenses; if null, licenses are assumed
      *                         to always be valid
      */
-    public static void setLicenseValidator(LicenseValidator licenseValidator) {
+    public static void setLicenseValidator(final LicenseValidator licenseValidator) {
         LicenseManagerProperties.licenseValidator = licenseValidator;
     }
 
@@ -132,7 +132,7 @@ public final class LicenseManagerProperties {
      *
      * @param cacheTimeInMinutes The length of time in minutes to cache license information
      */
-    public static void setCacheTimeInMinutes(int cacheTimeInMinutes) {
+    public static void setCacheTimeInMinutes(final int cacheTimeInMinutes) {
         LicenseManagerProperties.cacheTimeInMinutes = cacheTimeInMinutes;
     }
 

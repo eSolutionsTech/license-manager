@@ -33,5 +33,5 @@ public interface LicenseProvider {
      * @param context The context for which to get the license
      * @return the signed license object.
      */
-    SignedLicense getLicense(Object context);
+    SignedLicense getLicense(final Object context);
 }

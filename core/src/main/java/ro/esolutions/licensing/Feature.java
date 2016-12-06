@@ -27,7 +27,6 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class Feature implements Cloneable, Serializable {
-    private static final long serialVersionUID = 1L;
 
     private final String name;
     private final int seats;
@@ -65,7 +64,7 @@ public class Feature implements Cloneable, Serializable {
         if (input == null)
             throw new IllegalArgumentException("The input argument did not contain exactly two parts.");
 
-        String[] parts = input.split("" + (char) 0x1F);
+        final String[] parts = input.split("" + (char) 0x1F);
         if (parts.length != 3)
             throw new IllegalArgumentException("The input argument did not contain exactly two parts.");
 
@@ -83,7 +82,7 @@ public class Feature implements Cloneable, Serializable {
      * @return {@code true} if the features are the same, {@code false} otherwise.
      */
     @Override
-    public final boolean equals(Object object) {
+    public final boolean equals(final Object object) {
         return EqualsBuilder.reflectionEquals(this, object);
     }
 

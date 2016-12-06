@@ -27,21 +27,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class InvalidSignatureException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "The signature provided is invalid and cannot be verified.";
 
     public InvalidSignatureException() {
-        super("The signature provided is invalid and cannot be verified.");
+        super(MESSAGE);
     }
 
-    public InvalidSignatureException(String message) {
+    public InvalidSignatureException(final String message) {
         super(message);
     }
 
-    public InvalidSignatureException(Throwable cause) {
-        super("The signature provided is invalid and cannot be verified.", cause);
+    public InvalidSignatureException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public InvalidSignatureException(String message, Throwable cause) {
+    public InvalidSignatureException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

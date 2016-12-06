@@ -27,6 +27,5 @@ package ro.esolutions.licensing;
  */
 public enum FeatureRestrictionOperand {
     AND,
-
     OR
 }

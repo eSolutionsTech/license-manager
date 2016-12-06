@@ -27,21 +27,20 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class CorruptSignatureException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
 
     public CorruptSignatureException() {
         super("The signature provided is corrupt or not a signature.");
     }
 
-    public CorruptSignatureException(String message) {
+    public CorruptSignatureException(final String message) {
         super(message);
     }
 
-    public CorruptSignatureException(Throwable cause) {
+    public CorruptSignatureException(final Throwable cause) {
         super("The signature provided is corrupt or not a signature.", cause);
     }
 
-    public CorruptSignatureException(String message, Throwable cause) {
+    public CorruptSignatureException(final String message,final Throwable cause) {
         super(message, cause);
     }
 }

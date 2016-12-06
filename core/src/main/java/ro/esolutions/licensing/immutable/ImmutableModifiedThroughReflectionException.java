@@ -28,21 +28,22 @@ package ro.esolutions.licensing.immutable;
  */
 @SuppressWarnings("unused")
 public class ImmutableModifiedThroughReflectionException extends Error {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "This immutable object appears to have been modified through reflection.";
 
     public ImmutableModifiedThroughReflectionException() {
-        super("This immutable object appears to have been modified through reflection.");
+        super(MESSAGE);
     }
 
-    public ImmutableModifiedThroughReflectionException(String message) {
+    public ImmutableModifiedThroughReflectionException(final String message) {
         super(message);
     }
 
-    public ImmutableModifiedThroughReflectionException(Throwable cause) {
-        super("This immutable object appears to have been modified through reflection.", cause);
+    public ImmutableModifiedThroughReflectionException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public ImmutableModifiedThroughReflectionException(String message, Throwable cause) {
+    public ImmutableModifiedThroughReflectionException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

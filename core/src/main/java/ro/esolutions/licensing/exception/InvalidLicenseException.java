@@ -28,21 +28,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class InvalidLicenseException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "The license is not valid.";
 
     public InvalidLicenseException() {
-        super("The license is not valid.");
+        super(MESSAGE);
     }
 
-    public InvalidLicenseException(String message) {
+    public InvalidLicenseException(final String message) {
         super(message);
     }
 
-    public InvalidLicenseException(Throwable cause) {
-        super("The license is not valid.", cause);
+    public InvalidLicenseException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public InvalidLicenseException(String message, Throwable cause) {
+    public InvalidLicenseException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

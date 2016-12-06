@@ -40,7 +40,7 @@ import java.net.URL;
  * @since 1.0.0
  */
 public class FileLicenseProvider extends DeserializingLicenseProvider {
-    private ClassLoader classLoader;
+    protected ClassLoader classLoader;
 
     private String filePrefix = "";
 
@@ -67,10 +67,10 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      *
      * @param classLoader The class loader to use for finding the file
      */
-    public FileLicenseProvider(ClassLoader classLoader) {
-        if (classLoader == null)
+    public FileLicenseProvider(final ClassLoader classLoader) {
+        if (classLoader == null) {
             throw new IllegalArgumentException("Argument classLoader cannot be null.");
-
+        }
         this.classLoader = classLoader;
         this.fileOnClasspath = true;
     }
@@ -83,14 +83,14 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      * @return the signed license data.
      */
     @Override
-    protected byte[] getLicenseData(Object context) {
-        if (context == null)
+    protected byte[] getLicenseData(final Object context) {
+        if (context == null) {
             throw new IllegalArgumentException("Argument context cannot be null.");
-
-        File file = this.getLicenseFile(context);
-        if (file == null || !file.exists() || !file.canRead())
+        }
+        final File file = this.getLicenseFile(context);
+        if (file == null || !file.exists() || !file.canRead()) {
             return null;
-
+        }
         try {
             byte[] data = FileUtils.readFileToByteArray(file);
 
@@ -99,7 +99,7 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
             }
 
             return data;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return null;
         }
     }
@@ -111,20 +111,20 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      * @param context The context for which to get the license
      * @return the license file handle.
      */
-    private File getLicenseFile(Object context) {
+    protected File getLicenseFile(final Object context) {
         String fileName = this.getFilePrefix() + context.toString() + this.getFileSuffix();
 
         if (this.isFileOnClasspath()) {
-            if (fileName.startsWith("/"))
+            if (fileName.startsWith("/")) {
                 fileName = fileName.substring(1);
-
-            URL url = this.classLoader.getResource(fileName);
-            if (url == null)
+            }
+            final URL url = this.classLoader.getResource(fileName);
+            if (url == null) {
                 fileName = null;
-            else {
+            } else {
                 try {
                     return new File(url.toURI());
-                } catch (URISyntaxException e) {
+                } catch (final URISyntaxException e) {
                     return new File(url.getPath());
                 }
             }
@@ -151,10 +151,10 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      *
      * @param filePrefix The file prefix
      */
-    public void setFilePrefix(String filePrefix) {
-        if (filePrefix == null)
+    public void setFilePrefix(final String filePrefix) {
+        if (filePrefix == null) {
             throw new IllegalArgumentException("Argument filePrefix cannot be null.");
-
+        }
         this.filePrefix = filePrefix;
     }
 
@@ -176,10 +176,10 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      *
      * @param fileSuffix The file suffix
      */
-    public void setFileSuffix(String fileSuffix) {
-        if (fileSuffix == null)
+    public void setFileSuffix(final String fileSuffix) {
+        if (fileSuffix == null) {
             throw new IllegalArgumentException("Argument fileSuffix cannot be null.");
-
+        }
         this.fileSuffix = fileSuffix;
     }
 
@@ -209,7 +209,7 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      *
      * @param fileOnClasspath Whether the file is on the classpath
      */
-    public void setFileOnClasspath(boolean fileOnClasspath) {
+    public void setFileOnClasspath(final boolean fileOnClasspath) {
         this.fileOnClasspath = fileOnClasspath;
     }
 
@@ -229,7 +229,7 @@ public class FileLicenseProvider extends DeserializingLicenseProvider {
      *
      * @param base64Encoded Whether the file is Base64 encoded.
      */
-    public void setBase64Encoded(boolean base64Encoded) {
+    public void setBase64Encoded(final boolean base64Encoded) {
         this.base64Encoded = base64Encoded;
     }
 }

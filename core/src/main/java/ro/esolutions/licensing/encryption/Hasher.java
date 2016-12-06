@@ -35,14 +35,14 @@ import ro.esolutions.licensing.exception.AlgorithmNotSupportedException;
  */
 public class Hasher {
     /**
-     * The algorithm we use to hash strings.
+     * The ALGORITHM we use to hash strings.
      */
-    private static final String algorithm = "SHA-512";
+    private static final String ALGORITHM = "SHA-512";
 
     /**
      * The salt that we use to hash strings.
      */
-    private static final String salt =
+    private static final String SALT =
             "j4KgU305PZp't.\"%ordAY7q*?z9%8]amNL(0Wx5eG49b1sRj(^;8Kg2w0EoM";
 
     /**
@@ -53,18 +53,12 @@ public class Hasher {
      * @param string The string to hash
      * @return the hashed string Base64 encoded.
      */
-    public static String hash(String string) {
+    public static String hash(final String string) {
         try {
-            return new String(
-                    Base64.encodeBase64(
-                            MessageDigest.getInstance(Hasher.algorithm).digest(
-                                    (string + Hasher.salt).getBytes(Charsets.UTF_8)
-                            )
-                    ),
-                    Charsets.UTF_8
-            );
-        } catch (NoSuchAlgorithmException e) {
-            throw new AlgorithmNotSupportedException(Hasher.algorithm, e);
+            final byte[] digest = MessageDigest.getInstance(ALGORITHM).digest((string + SALT).getBytes(Charsets.UTF_8));
+            return new String(Base64.encodeBase64(digest),Charsets.UTF_8);
+        } catch (final NoSuchAlgorithmException e) {
+            throw new AlgorithmNotSupportedException(ALGORITHM, e);
         }
     }
 

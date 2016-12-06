@@ -28,21 +28,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class ExpiredLicenseException extends InvalidLicenseException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String THE_LICENSE_HAS_EXPIRED = "The license has expired.";
 
     public ExpiredLicenseException() {
-        super("The license has expired.");
+        super(THE_LICENSE_HAS_EXPIRED);
     }
 
-    public ExpiredLicenseException(String message) {
+    public ExpiredLicenseException(final String message) {
         super(message);
     }
 
-    public ExpiredLicenseException(Throwable cause) {
-        super("The license has expired.", cause);
+    public ExpiredLicenseException(final Throwable cause) {
+        super(THE_LICENSE_HAS_EXPIRED, cause);
     }
 
-    public ExpiredLicenseException(String message, Throwable cause) {
+    public ExpiredLicenseException(final String message,final Throwable cause) {
         super(message, cause);
     }
 }

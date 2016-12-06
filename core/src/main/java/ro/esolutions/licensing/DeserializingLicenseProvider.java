@@ -35,13 +35,13 @@ public abstract class DeserializingLicenseProvider implements LicenseProvider {
      * @return the signed license object.
      */
     @Override
-    public final SignedLicense getLicense(Object context) {
-        byte[] data = this.getLicenseData(context);
+    public final SignedLicense getLicense(final Object context) {
+        final byte[] data = this.getLicenseData(context);
 
         return data == null ? null : this.deserializeLicense(data);
     }
 
-    public final SignedLicense deserializeLicense(byte[] data) {
+    public final SignedLicense deserializeLicense(final byte[] data) {
         return new ObjectSerializer().readObject(SignedLicense.class, data);
     }
 
@@ -52,5 +52,5 @@ public abstract class DeserializingLicenseProvider implements LicenseProvider {
      * @param context The context for which to get the license
      * @return the signed license data.
      */
-    protected abstract byte[] getLicenseData(Object context);
+    protected abstract byte[] getLicenseData(final Object context);
 }

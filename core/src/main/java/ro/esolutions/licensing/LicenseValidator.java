@@ -45,5 +45,5 @@ public interface LicenseValidator {
      *                                                                   is encouraged.
      * @throws ro.esolutions.licensing.exception.ExpiredLicenseException when the license is expired.
      */
-    void validateLicense(License license) throws InvalidLicenseException;
+    void validateLicense(final License license) throws InvalidLicenseException;
 }

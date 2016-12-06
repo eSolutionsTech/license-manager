@@ -66,7 +66,7 @@ final class LicenseSecurityManager extends SecurityManager {
             new RuntimePermission("setSecurityManager");
 
     static {
-        SecurityManager manager = System.getSecurityManager();
+        final SecurityManager manager = System.getSecurityManager();
         if (manager == null) {
             // install the security manager
             LicenseSecurityManager.installSecurityManagerWithParent(null);
@@ -78,7 +78,7 @@ final class LicenseSecurityManager extends SecurityManager {
         }
     }
 
-    private static boolean securityManagerIsSuitableReplacement(SecurityManager securityManager) {
+    private static boolean securityManagerIsSuitableReplacement(final SecurityManager securityManager) {
         if (securityManager == null)
             throw new IllegalArgumentException("Parameter securityManager cannot be null!");
 
@@ -86,7 +86,7 @@ final class LicenseSecurityManager extends SecurityManager {
         try {
             securityManager.checkMemberAccess(License.class, Member.DECLARED);
             return false;
-        } catch (SecurityException ignore) {
+        } catch (final SecurityException ignore) {
             // this is a good thing
         }
 
@@ -109,7 +109,7 @@ final class LicenseSecurityManager extends SecurityManager {
         return true;
     }
 
-    private static void installSecurityManagerWithParent(SecurityManager parent) {
+    private static void installSecurityManagerWithParent(final SecurityManager parent) {
         try {
             // install the security manager
             LicenseSecurityManager.instance = new LicenseSecurityManager(parent);
@@ -122,7 +122,7 @@ final class LicenseSecurityManager extends SecurityManager {
 
     private final SecurityManager next;
 
-    private LicenseSecurityManager(SecurityManager next) {
+    private LicenseSecurityManager(final SecurityManager next) {
         super();
 
         this.next = next;
@@ -130,10 +130,10 @@ final class LicenseSecurityManager extends SecurityManager {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void checkMemberAccess(Class<?> reflectionClass, int memberAccessType) {
-        if (reflectionClass == null)
+    public void checkMemberAccess(final Class<?> reflectionClass,final int memberAccessType) {
+        if (reflectionClass == null) {
             throw new IllegalArgumentException("Parameter reflectionClass cannot be null.");
-
+        }
         this.inCheck = true;
 
         try {
@@ -144,7 +144,7 @@ final class LicenseSecurityManager extends SecurityManager {
 				 * ClassLoaders and (SomeClass.class.equals(SomeClass.class)) evaluates to false when the classes are
 				 * loaded by two different ClassLoaders. Only their class canonical names are guaranteed to be the same.
 				 */
-                Package packageObject = reflectionClass.getPackage();
+                final Package packageObject = reflectionClass.getPackage();
                 if (
                         packageObject != null &&
                                 packageObject.getName().startsWith("ro.esolutions.licensing") &&
@@ -195,7 +195,7 @@ final class LicenseSecurityManager extends SecurityManager {
 					 * have any questions.
 					 */
 
-                    Class stack[] = getClassContext();
+                    final Class stack[] = getClassContext();
 					/*
 					 * stack depth of 4 should be the caller of one of the
 					 * methods in java.lang.Class that invoke checkMember
@@ -219,7 +219,7 @@ final class LicenseSecurityManager extends SecurityManager {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void checkPermission(Permission permission) {
+    public void checkPermission(final Permission permission) {
         this.inCheck = true;
 
         try {
@@ -234,122 +234,131 @@ final class LicenseSecurityManager extends SecurityManager {
     }
 
     @Override
-    public void checkPackageAccess(String packageName) {
-        if (this.next != null)
+    public void checkPackageAccess(final String packageName) {
+        if (this.next != null) {
             this.next.checkPackageAccess(packageName);
+        }
     }
 
     @Override
-    public void checkPermission(Permission permission, Object object) {
-        if (this.next != null)
+    public void checkPermission(final Permission permission,final Object object) {
+        if (this.next != null) {
             this.next.checkPermission(permission, object);
+        }
     }
 
     @Override
     public void checkCreateClassLoader() {
-        if (this.next != null)
+        if (this.next != null) {
             this.next.checkCreateClassLoader();
+        }
     }
 
     @Override
-    public void checkAccess(Thread thread) {
-        if (this.next != null)
+    public void checkAccess(final Thread thread) {
+        if (this.next != null) {
             this.next.checkAccess(thread);
+        }
     }
 
     @Override
-    public void checkAccess(ThreadGroup threadGroup) {
-        if (this.next != null)
+    public void checkAccess(final ThreadGroup threadGroup) {
+        if (this.next != null) {
             this.next.checkAccess(threadGroup);
+        }
     }
 
     @Override
-    public void checkExit(int i) {
-        if (this.next != null)
+    public void checkExit(final int i) {
+        if (this.next != null) {
             this.next.checkExit(i);
+        }
     }
 
     @Override
-    public void checkExec(String s) {
-        if (this.next != null)
+    public void checkExec(final String s) {
+        if (this.next != null) {
             this.next.checkExec(s);
+        }
     }
 
     @Override
-    public void checkLink(String s) {
-        if (this.next != null)
+    public void checkLink(final String s) {
+        if (this.next != null) {
             this.next.checkLink(s);
+        }
     }
 
     @Override
-    public void checkRead(FileDescriptor fileDescriptor) {
-        if (this.next != null)
+    public void checkRead(final FileDescriptor fileDescriptor) {
+        if (this.next != null) {
             this.next.checkRead(fileDescriptor);
+        }
     }
 
     @Override
-    public void checkRead(String s) {
+    public void checkRead(final String s) {
         if (this.next != null)
             this.next.checkRead(s);
     }
 
     @Override
-    public void checkRead(String s, Object o) {
+    public void checkRead(final String s,final Object o) {
         if (this.next != null)
             this.next.checkRead(s);
     }
 
     @Override
-    public void checkWrite(FileDescriptor fileDescriptor) {
+    public void checkWrite(final FileDescriptor fileDescriptor) {
         if (this.next != null)
             this.next.checkWrite(fileDescriptor);
     }
 
     @Override
-    public void checkWrite(String s) {
+    public void checkWrite(final String s) {
         if (this.next != null)
             this.next.checkWrite(s);
     }
 
     @Override
-    public void checkDelete(String s) {
+    public void checkDelete(final String s) {
         if (this.next != null)
             this.next.checkDelete(s);
     }
 
     @Override
-    public void checkConnect(String s, int i) {
+    public void checkConnect(final String s,final int i) {
         if (this.next != null)
             this.next.checkConnect(s, i);
     }
 
     @Override
-    public void checkConnect(String s, int i, Object o) {
+    public void checkConnect(final String s,final int i,final Object o) {
         if (this.next != null)
             this.next.checkConnect(s, i, o);
     }
 
     @Override
-    public void checkListen(int i) {
+    public void checkListen(final int i) {
         if (this.next != null)
             this.next.checkListen(i);
     }
 
     @Override
-    public void checkAccept(String s, int i) {
+    public void checkAccept(final String s,final int i) {
         if (this.next != null)
             this.next.checkAccept(s, i);
     }
 
     @Override
-    public void checkMulticast(InetAddress inetAddress) {
+    public void checkMulticast(final InetAddress inetAddress) {
         if (this.next != null)
             this.next.checkMulticast(inetAddress);
     }
 
     @Override
     @Deprecated
-    public void checkMulticast(InetAddress inetAddress, byte b) {
+    public void checkMulticast(final InetAddress inetAddress,final byte b) {
         if (this.next != null)
             this.next.checkMulticast(inetAddress, b);
     }
@@ -361,7 +370,7 @@ final class LicenseSecurityManager extends SecurityManager {
     }
 
     @Override
-    public void checkPropertyAccess(String s) {
+    public void checkPropertyAccess(final String s) {
         if (this.next != null)
             this.next.checkPropertyAccess(s);
     }
@@ -387,7 +396,7 @@ final class LicenseSecurityManager extends SecurityManager {
     }
 
     @Override
-    public void checkPackageDefinition(String s) {
+    public void checkPackageDefinition(final String s) {
         if (this.next != null)
             this.next.checkPackageDefinition(s);
     }
@@ -399,14 +408,14 @@ final class LicenseSecurityManager extends SecurityManager {
     }
 
     @Override
-    public void checkSecurityAccess(String s) {
+    public void checkSecurityAccess(final String s) {
         if (this.next != null)
             this.next.checkSecurityAccess(s);
     }
 
     @Override
     @Deprecated
-    public boolean checkTopLevelWindow(Object window) {
+    public boolean checkTopLevelWindow(final Object window) {
         return this.next == null || this.next.checkTopLevelWindow(window);
     }
 

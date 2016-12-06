@@ -29,21 +29,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class FailedToDecryptException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "Failed to decrypt the data. Either the password was incorrect or the data was corrupt.";
 
     public FailedToDecryptException() {
-        super("Failed to decrypt the data. Either the password was incorrect or the data was corrupt.");
+        super(MESSAGE);
     }
 
-    public FailedToDecryptException(String message) {
+    public FailedToDecryptException(final String message) {
         super(message);
     }
 
-    public FailedToDecryptException(Throwable cause) {
-        super("Failed to decrypt the data. Either the password was incorrect or the data was corrupt.", cause);
+    public FailedToDecryptException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public FailedToDecryptException(String message, Throwable cause) {
+    public FailedToDecryptException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

@@ -32,7 +32,7 @@ public final class ImmutableListIterator<E> implements Immutable, ListIterator<E
 
     private final ValidObject validObject;
 
-    ImmutableListIterator(ListIterator<E> iterator, ValidObject validObject) {
+    ImmutableListIterator(final ListIterator<E> iterator,final ValidObject validObject) {
         this.internal = iterator;
         this.validObject = validObject;
     }
@@ -86,7 +86,7 @@ public final class ImmutableListIterator<E> implements Immutable, ListIterator<E
     }
 
     @Override
-    public void add(E e) {
+    public void add(final E e) {
         throw new UnsupportedOperationException("This iterator cannot be modified.");
     }
 
@@ -96,7 +96,7 @@ public final class ImmutableListIterator<E> implements Immutable, ListIterator<E
     }
 
     @Override
-    public void set(E e) {
+    public void set(final E e) {
         throw new UnsupportedOperationException("This iterator cannot be modified.");
     }
 }

@@ -53,7 +53,7 @@ public final class RSAKeyPairGenerator implements RSAKeyPairGeneratorInterface {
         KeyPairGenerator keyGenerator;
 
         try {
-            keyGenerator = KeyPairGenerator.getInstance(KeyFileUtilities.keyAlgorithm);
+            keyGenerator = KeyPairGenerator.getInstance(KeyFileUtilities.KEY_ALGORITHM);
         } catch (final NoSuchAlgorithmException e) {
             throw new RSA2048NotSupportedException("RSA keys are not supported on your system. Contact your system administrator for assistance.", e);
         }

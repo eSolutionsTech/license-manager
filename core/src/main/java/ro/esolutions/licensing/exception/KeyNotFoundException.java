@@ -27,21 +27,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class KeyNotFoundException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "The key file could not be found.";
 
     public KeyNotFoundException() {
-        super("The key file could not be found.");
+        super(MESSAGE);
     }
 
-    public KeyNotFoundException(String message) {
+    public KeyNotFoundException(final String message) {
         super(message);
     }
 
-    public KeyNotFoundException(Throwable cause) {
-        super("The key file could not be found.", cause);
+    public KeyNotFoundException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public KeyNotFoundException(String message, Throwable cause) {
+    public KeyNotFoundException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

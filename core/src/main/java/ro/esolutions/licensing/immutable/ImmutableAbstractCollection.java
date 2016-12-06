@@ -33,7 +33,6 @@ import java.util.Collection;
  */
 public abstract class ImmutableAbstractCollection<E> extends ValidObject
         implements Immutable, Collection<E>, Serializable {
-    private final static long serialVersionUID = -4187794066638697055L;
 
     final Collection<E> internalCollection;
 
@@ -47,10 +46,10 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
      * @param collection The collection to decorate, must not be null
      * @throws IllegalArgumentException if collection is null
      */
-    protected ImmutableAbstractCollection(Collection<E> collection) {
-        if (collection == null)
+    protected ImmutableAbstractCollection(final Collection<E> collection) {
+        if (collection == null) {
             throw new IllegalArgumentException("Parameter collection must not be null.");
-
+        }
         this.internalCollection = collection;
         this.internalSize = this.internalCollection.size();
         this.internalHashCode = this.internalCollection.hashCode();
@@ -70,7 +69,7 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         synchronized (this.internalCollection) {
             this.checkValidity();
             return o == this || (
@@ -92,19 +91,19 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
 
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean contains(Object object) {
+    public final boolean contains(final Object object) {
         synchronized (this.internalCollection) {
             this.checkValidity();
             try {
                 return this.internalCollection.contains(object);
-            } catch (ClassCastException e) {
+            } catch (final ClassCastException e) {
                 return false;
             }
         }
     }
 
     @Override
-    public final boolean containsAll(Collection<?> c) {
+    public final boolean containsAll(final Collection<?> c) {
         synchronized (this.internalCollection) {
             this.checkValidity();
             return this.internalCollection.containsAll(c);
@@ -145,7 +144,7 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
 
     @Override
     @SuppressWarnings("SuspiciousToArrayCall")
-    public final <T> T[] toArray(T[] prototype) {
+    public final <T> T[] toArray(final T[] prototype) {
         synchronized (this.internalCollection) {
             this.checkValidity();
             return this.internalCollection.toArray(prototype);
@@ -158,12 +157,12 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
     }
 
     @Override
-    public final boolean add(E e) {
+    public final boolean add(final E e) {
         throw new UnsupportedOperationException("This collection cannot be modified.");
     }
 
     @Override
-    public final boolean addAll(Collection<? extends E> c) {
+    public final boolean addAll(final Collection<? extends E> c) {
         throw new UnsupportedOperationException("This collection cannot be modified.");
     }
 
@@ -173,17 +172,17 @@ public abstract class ImmutableAbstractCollection<E> extends ValidObject
     }
 
     @Override
-    public final boolean remove(Object o) {
+    public final boolean remove(final Object o) {
         throw new UnsupportedOperationException("This collection cannot be modified.");
     }
 
     @Override
-    public final boolean removeAll(Collection<?> c) {
+    public final boolean removeAll(final Collection<?> c) {
         throw new UnsupportedOperationException("This collection cannot be modified.");
     }
 
     @Override
-    public final boolean retainAll(Collection<?> c) {
+    public final boolean retainAll(final Collection<?> c) {
         throw new UnsupportedOperationException("This collection cannot be modified.");
     }
 }

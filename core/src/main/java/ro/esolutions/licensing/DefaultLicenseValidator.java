@@ -37,11 +37,11 @@ public class DefaultLicenseValidator implements LicenseValidator {
                     " expired on " + this.getFormattedDate(license.getGoodAfterDate()) + ".");
     }
 
-    private String getLicenseDescription(final License license) {
+    public String getLicenseDescription(final License license) {
         return license.getSubject() + " license for " + license.getHolder();
     }
 
-    private String getFormattedDate(final Instant time) {
+    public String getFormattedDate(final Instant time) {
         return DateTimeFormatter.ISO_INSTANT.format(time);
     }
 }

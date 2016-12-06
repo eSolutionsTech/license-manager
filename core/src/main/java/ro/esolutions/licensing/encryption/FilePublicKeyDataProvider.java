@@ -19,12 +19,11 @@
 package ro.esolutions.licensing.encryption;
 
 import org.apache.commons.io.FileUtils;
+import ro.esolutions.licensing.exception.KeyNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import ro.esolutions.licensing.exception.KeyNotFoundException;
 
 /**
  * A default implementation of {@link PublicKeyDataProvider} that reads the public key from a file.<br />
@@ -43,7 +42,7 @@ public class FilePublicKeyDataProvider implements PublicKeyDataProvider {
      *
      * @param publicKeyFile the public key file
      */
-    public FilePublicKeyDataProvider(File publicKeyFile) {
+    public FilePublicKeyDataProvider(final File publicKeyFile) {
         this.publicKeyFile = publicKeyFile.getAbsoluteFile();
     }
 
@@ -52,7 +51,7 @@ public class FilePublicKeyDataProvider implements PublicKeyDataProvider {
      *
      * @param publicKeyFileName The public key file name
      */
-    public FilePublicKeyDataProvider(String publicKeyFileName) {
+    public FilePublicKeyDataProvider(final String publicKeyFileName) {
         this.publicKeyFile = new File(publicKeyFileName).getAbsoluteFile();
     }
 
@@ -75,12 +74,10 @@ public class FilePublicKeyDataProvider implements PublicKeyDataProvider {
     public byte[] getEncryptedPublicKeyData() throws KeyNotFoundException {
         try {
             return FileUtils.readFileToByteArray(this.publicKeyFile);
-        } catch (FileNotFoundException e) {
-            throw new KeyNotFoundException("The public key file [" + this.publicKeyFile.getPath() +
-                    "] does not exist.");
-        } catch (IOException e) {
-            throw new KeyNotFoundException("Could not read from the public key file [" +
-                    this.publicKeyFile.getPath() + "].", e);
+        } catch (final FileNotFoundException e) {
+            throw new KeyNotFoundException("The public key file [" + this.publicKeyFile.getPath() + "] does not exist.");
+        } catch (final IOException e) {
+            throw new KeyNotFoundException("Could not read from the public key file [" + this.publicKeyFile.getPath() + "].", e);
         }
     }
 

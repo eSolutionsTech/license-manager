@@ -28,21 +28,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class InappropriateKeyException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "The specified key is inappropriate for the cipher.";
 
     public InappropriateKeyException() {
-        super("The specified key is inappropriate for the cipher.");
+        super(MESSAGE);
     }
 
-    public InappropriateKeyException(String message) {
+    public InappropriateKeyException(final String message) {
         super(message);
     }
 
-    public InappropriateKeyException(Throwable cause) {
-        super("The specified key is inappropriate for the cipher.", cause);
+    public InappropriateKeyException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public InappropriateKeyException(String message, Throwable cause) {
+    public InappropriateKeyException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

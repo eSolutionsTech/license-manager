@@ -29,21 +29,22 @@ package ro.esolutions.licensing.exception;
  */
 @SuppressWarnings("unused")
 public class ObjectDeserializationException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+
+    private static final String MESSAGE = "An error occurred while reading the object from the byte array.";
 
     public ObjectDeserializationException() {
-        super("An error occurred while reading the object from the byte array.");
+        super(MESSAGE);
     }
 
-    public ObjectDeserializationException(String message) {
+    public ObjectDeserializationException(final String message) {
         super(message);
     }
 
-    public ObjectDeserializationException(Throwable cause) {
-        super("An error occurred while reading the object from the byte array.", cause);
+    public ObjectDeserializationException(final Throwable cause) {
+        super(MESSAGE, cause);
     }
 
-    public ObjectDeserializationException(String message, Throwable cause) {
+    public ObjectDeserializationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

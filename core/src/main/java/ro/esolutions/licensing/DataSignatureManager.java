@@ -59,7 +59,7 @@ public final class DataSignatureManager {
     public final void verifySignature(final PublicKey key, final byte[] data, final byte[] signatureContent)
             throws AlgorithmNotSupportedException, InappropriateKeyException, CorruptSignatureException, InvalidSignatureException {
 
-        Signature signature = this.getSignature();
+        final Signature signature = this.getSignature();
 
         try {
             signature.initVerify(key);
@@ -83,9 +83,9 @@ public final class DataSignatureManager {
 
     private Signature getSignature() {
         try {
-            return Signature.getInstance("SHA1with" + KeyFileUtilities.keyAlgorithm);
+            return Signature.getInstance("SHA1with" + KeyFileUtilities.KEY_ALGORITHM);
         } catch (final NoSuchAlgorithmException e) {
-            throw new AlgorithmNotSupportedException("SHA-1 with " + KeyFileUtilities.keyAlgorithm);
+            throw new AlgorithmNotSupportedException("SHA-1 with " + KeyFileUtilities.KEY_ALGORITHM);
         }
     }
 }

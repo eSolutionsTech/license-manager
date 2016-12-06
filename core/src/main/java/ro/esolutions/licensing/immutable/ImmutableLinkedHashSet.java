@@ -35,7 +35,6 @@ import java.util.Set;
  */
 public final class ImmutableLinkedHashSet<E> extends ImmutableAbstractCollection<E>
         implements Set<E>, Serializable, Cloneable {
-    private final static long serialVersionUID = 2284350955829958161L;
 
     private final LinkedHashSet<E> internalSet;
 
@@ -47,11 +46,11 @@ public final class ImmutableLinkedHashSet<E> extends ImmutableAbstractCollection
      * @param list the set to decorate, must not be null
      * @throws IllegalArgumentException if list is null
      */
-    public ImmutableLinkedHashSet(Set<E> list) {
+    public ImmutableLinkedHashSet(final Set<E> list) {
         super(new LinkedHashSet<>(list));
 
         this.internalSet = (LinkedHashSet<E>) this.internalCollection;
-        this.internalList = new ArrayList<E>(list);
+        this.internalList = new ArrayList<>(list);
     }
 
     @Override
@@ -69,7 +68,7 @@ public final class ImmutableLinkedHashSet<E> extends ImmutableAbstractCollection
      * @param index The element to retrieve.
      * @return The element requested.
      */
-    public E get(int index) {
+    public E get(final int index) {
         return index < 0 ? null : this.internalList.get(index);
     }
 
@@ -79,7 +78,7 @@ public final class ImmutableLinkedHashSet<E> extends ImmutableAbstractCollection
      * @param object The element to match.
      * @return The element requested.
      */
-    public E get(E object) {
+    public E get(final E object) {
         return this.get(this.internalList.indexOf(object));
     }
 }

@@ -42,57 +42,57 @@ import ro.esolutions.licensing.exception.InappropriateKeySpecificationException;
  * @since 1.0.0
  */
 public class KeyFileUtilities {
-    public static final String keyAlgorithm = "RSA";
+    public static final String KEY_ALGORITHM = "RSA";
 
-    protected static void writeEncryptedPrivateKey(PrivateKey privateKey, File file, char[] passphrase)
+    protected static void writeEncryptedPrivateKey(final PrivateKey privateKey,final File file, char[] passPhrase)
             throws IOException {
 
-        FileUtils.writeByteArrayToFile(file, KeyFileUtilities.writeEncryptedPrivateKey(privateKey, passphrase));
+        FileUtils.writeByteArrayToFile(file, KeyFileUtilities.writeEncryptedPrivateKey(privateKey, passPhrase));
     }
 
-    protected static void writeEncryptedPublicKey(PublicKey publicKey, File file, char[] passphrase)
+    protected static void writeEncryptedPublicKey(final PublicKey publicKey,final File file,final char[] passPhrase)
             throws IOException {
-        FileUtils.writeByteArrayToFile(file, KeyFileUtilities.writeEncryptedPublicKey(publicKey, passphrase));
+        FileUtils.writeByteArrayToFile(file, KeyFileUtilities.writeEncryptedPublicKey(publicKey, passPhrase));
     }
 
-    protected static PrivateKey readEncryptedPrivateKey(File file, char[] passphrase) throws IOException {
-        return KeyFileUtilities.readEncryptedPrivateKey(FileUtils.readFileToByteArray(file), passphrase);
+    protected static PrivateKey readEncryptedPrivateKey(final File file,final char[] passPhrase) throws IOException {
+        return KeyFileUtilities.readEncryptedPrivateKey(FileUtils.readFileToByteArray(file), passPhrase);
     }
 
-    protected static PublicKey readEncryptedPublicKey(File file, char[] passphrase) throws IOException {
-        return KeyFileUtilities.readEncryptedPublicKey(FileUtils.readFileToByteArray(file), passphrase);
+    protected static PublicKey readEncryptedPublicKey(final File file,final char[] passPhrase) throws IOException {
+        return KeyFileUtilities.readEncryptedPublicKey(FileUtils.readFileToByteArray(file), passPhrase);
     }
 
-    protected static byte[] writeEncryptedPrivateKey(PrivateKey privateKey, char[] passphrase) {
-        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
-        return Encryptor.encryptRaw(pkcs8EncodedKeySpec.getEncoded(), passphrase);
+    protected static byte[] writeEncryptedPrivateKey(final PrivateKey privateKey,final char[] passPhrase) {
+        final PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKey.getEncoded());
+        return Encryptor.encryptRaw(pkcs8EncodedKeySpec.getEncoded(), passPhrase);
     }
 
-    protected static byte[] writeEncryptedPublicKey(PublicKey publicKey, char[] passphrase) {
-        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(publicKey.getEncoded());
-        return Encryptor.encryptRaw(x509EncodedKeySpec.getEncoded(), passphrase);
+    protected static byte[] writeEncryptedPublicKey(final PublicKey publicKey,final char[] passPhrase) {
+        final X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(publicKey.getEncoded());
+        return Encryptor.encryptRaw(x509EncodedKeySpec.getEncoded(), passPhrase);
     }
 
-    public static PrivateKey readEncryptedPrivateKey(byte[] fileContents, char[] passphrase) {
-        PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(Encryptor.decryptRaw(fileContents, passphrase));
+    public static PrivateKey readEncryptedPrivateKey(final byte[] fileContents,final char[] passPhrase) {
+        final PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(Encryptor.decryptRaw(fileContents, passPhrase));
 
         try {
-            return KeyFactory.getInstance(KeyFileUtilities.keyAlgorithm).generatePrivate(privateKeySpec);
-        } catch (NoSuchAlgorithmException e) {
-            throw new AlgorithmNotSupportedException(KeyFileUtilities.keyAlgorithm, e);
-        } catch (InvalidKeySpecException e) {
+            return KeyFactory.getInstance(KEY_ALGORITHM).generatePrivate(privateKeySpec);
+        } catch (final NoSuchAlgorithmException e) {
+            throw new AlgorithmNotSupportedException(KEY_ALGORITHM, e);
+        } catch (final InvalidKeySpecException e) {
             throw new InappropriateKeySpecificationException(e);
         }
     }
 
-    public static PublicKey readEncryptedPublicKey(byte[] fileContents, char[] passphrase) {
-        X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Encryptor.decryptRaw(fileContents, passphrase));
+    public static PublicKey readEncryptedPublicKey(final byte[] fileContents,final char[] passPhrase) {
+        final X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Encryptor.decryptRaw(fileContents, passPhrase));
 
         try {
-            return KeyFactory.getInstance(KeyFileUtilities.keyAlgorithm).generatePublic(publicKeySpec);
-        } catch (NoSuchAlgorithmException e) {
-            throw new AlgorithmNotSupportedException(KeyFileUtilities.keyAlgorithm, e);
-        } catch (InvalidKeySpecException e) {
+            return KeyFactory.getInstance(KEY_ALGORITHM).generatePublic(publicKeySpec);
+        } catch (final NoSuchAlgorithmException e) {
+            throw new AlgorithmNotSupportedException(KEY_ALGORITHM, e);
+        } catch (final InvalidKeySpecException e) {
             throw new InappropriateKeySpecificationException(e);
         }
     }

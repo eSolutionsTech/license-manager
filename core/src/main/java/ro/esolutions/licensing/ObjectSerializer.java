@@ -19,16 +19,11 @@
 package ro.esolutions.licensing;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import ro.esolutions.licensing.exception.ObjectDeserializationException;
 import ro.esolutions.licensing.exception.ObjectSerializationException;
 import ro.esolutions.licensing.exception.ObjectTypeNotExpectedException;
+
+import java.io.*;
 
 /**
  * This is a helper class for writing any object and reading simple objects (no
@@ -52,35 +47,21 @@ public final class ObjectSerializer {
      *                                        NoClassDefFoundError} occurs
      * @throws ObjectDeserializationException If an I/O exception occurs while deserializing the object from the stream
      */
-    public final <T extends Serializable> T readObject(Class<T> expectedType, byte[] byteStream)
+    public final <T extends Serializable> T readObject(final Class<T> expectedType, final byte[] byteStream)
             throws ObjectDeserializationException {
-        ByteArrayInputStream bytes = new ByteArrayInputStream(byteStream);
-        ObjectInputStream stream = null;
-        try {
-            stream = new ObjectInputStream(bytes);
-            Object allegedObject = stream.readObject();
+        try (final ByteArrayInputStream bytes = new ByteArrayInputStream(byteStream);
+             final ObjectInputStream stream = new ObjectInputStream(bytes)) {
+
+            final Object allegedObject = stream.readObject();
             if (!expectedType.isInstance(allegedObject)) {
-                throw new ObjectTypeNotExpectedException(
-                        expectedType.getName(),
-                        allegedObject.getClass().getName()
-                );
+                throw new ObjectTypeNotExpectedException(expectedType.getName(), allegedObject.getClass().getName());
             }
 
             return expectedType.cast(allegedObject);
-        } catch (IOException e) {
-            throw new ObjectDeserializationException(
-                    "An I/O error occurred while reading the object from the byte array.",
-                    e
-            );
-        } catch (ClassNotFoundException | NoClassDefFoundError e) {
+        } catch (final IOException e) {
+            throw new ObjectDeserializationException("An I/O error occurred while reading the object from the byte array.", e);
+        } catch (final ClassNotFoundException | NoClassDefFoundError e) {
             throw new ObjectTypeNotExpectedException(expectedType.getName(), e.getMessage(), e);
-        } finally {
-            try {
-                if (stream != null) {
-                    stream.close();
-                }
-            } catch (IOException ignore) {
-            }
         }
     }
 
@@ -91,23 +72,16 @@ public final class ObjectSerializer {
      * @return the byte stream with the object serialized in it.
      * @throws ObjectSerializationException if an I/O exception occurs while serializing the object.
      */
-    public final byte[] writeObject(Serializable object) throws ObjectSerializationException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    public final byte[] writeObject(final Serializable object) throws ObjectSerializationException {
 
-        ObjectOutputStream stream = null;
-        try {
-            stream = new ObjectOutputStream(bytes);
+        try (final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+             final ObjectOutputStream stream = new ObjectOutputStream(bytes)) {
             stream.writeObject(object);
-        } catch (IOException e) {
+            return bytes.toByteArray();
+        } catch (final IOException e) {
             throw new ObjectSerializationException(e);
-        } finally {
-            try {
-                if (stream != null)
-                    stream.close();
-            } catch (IOException ignore) {
-            }
         }
 
-        return bytes.toByteArray();
+
     }
 }

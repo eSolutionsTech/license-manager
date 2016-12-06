@@ -25,6 +25,6 @@ package ro.esolutions.licensing.immutable;
  * @version 1.0.0
  * @since 1.0.0
  */
-interface Immutable {
+public interface Immutable {
 
 }
