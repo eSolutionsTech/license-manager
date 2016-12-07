@@ -25,7 +25,7 @@
     <packaging>pom</packaging>
 
     <name>License Manager</name>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <description>
         License Manager - A Java-based licensing tool for licensing commercial applications.
     </description>
