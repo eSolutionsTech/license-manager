@@ -32,6 +32,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public final class License implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
 
     private final String productKey;
     private final String holder;

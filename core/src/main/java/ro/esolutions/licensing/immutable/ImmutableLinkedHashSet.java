@@ -35,6 +35,7 @@ import java.util.Set;
  */
 public final class ImmutableLinkedHashSet<E> extends ImmutableAbstractCollection<E>
         implements Set<E>, Serializable, Cloneable {
+    private final static long serialVersionUID = 2284350955829958161L;
 
     private final LinkedHashSet<E> internalSet;
 
