@@ -30,8 +30,9 @@ import java.util.Arrays;
  * @since 1.0.0
  */
 public final class SignedLicense implements Serializable {
-    private final byte[] licenseContent;
+    private final static long serialVersionUID = -8465360339059185020L;
 
+    private final byte[] licenseContent;
     private final byte[] signatureContent;
 
     public SignedLicense(final byte[] licenseContent,final byte[] signatureContent) {

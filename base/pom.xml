@@ -23,7 +23,7 @@
     <parent>
         <groupId>ro.esolutions</groupId>
         <artifactId>license-manager</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>license-manager-base</artifactId>
