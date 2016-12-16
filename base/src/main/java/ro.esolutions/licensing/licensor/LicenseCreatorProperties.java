@@ -35,8 +35,8 @@ public final class LicenseCreatorProperties {
     private static PasswordProvider privateKeyPasswordProvider;
 
     /**
-     * Sets the provider of the data for the private key used to sign the license object.<br />
-     * <br />
+     * Sets the provider of the data for the private key used to sign the license object.<br>
+     * <br>
      * This field is <b>required</b>.
      *
      * @param privateKeyDataProvider The provider of the data for the private key used to sign the license object
@@ -50,8 +50,8 @@ public final class LicenseCreatorProperties {
     }
 
     /**
-     * Sets the provider of the password for decrypting the private key.<br />
-     * <br />
+     * Sets the provider of the password for decrypting the private key.<br>
+     * <br>
      * This field is <b>required</b>.
      *
      * @param privateKeyPasswordProvider The provider of the password for decrypting the private key

@@ -34,6 +34,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public final class ImmutableArrayList<E> extends ImmutableAbstractCollection<E> implements List<E>, Serializable, Cloneable {
+    private final static long serialVersionUID = -6912407141647481417L;
 
     private final ArrayList<E> internalList;
 

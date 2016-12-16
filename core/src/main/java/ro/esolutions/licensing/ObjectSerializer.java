@@ -34,19 +34,7 @@ import java.io.*;
  * @since 1.0.0
  */
 public final class ObjectSerializer {
-    /**
-     * Deserializes an object of the specified type from the provided byte stream.
-     *
-     * @param expectedType The type that is expected to be retrieved from {@code byteStream} (must implement {@link
-     *                     Serializable})
-     * @param byteStream   The byte stream to retrieve the object from (it must contain exactly one object, of the exact
-     *                     type passed to {@code expectedType})
-     * @return the requested unserialized object, presumably in the stream.
-     * @throws ObjectTypeNotExpectedException If the object found in the stream does not match the type {@code
-     *                                        expectedType} or if a {@link ClassNotFoundException} or {@link
-     *                                        NoClassDefFoundError} occurs
-     * @throws ObjectDeserializationException If an I/O exception occurs while deserializing the object from the stream
-     */
+
     public final <T extends Serializable> T readObject(final Class<T> expectedType, final byte[] byteStream)
             throws ObjectDeserializationException {
         try (final ByteArrayInputStream bytes = new ByteArrayInputStream(byteStream);

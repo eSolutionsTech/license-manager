@@ -33,6 +33,7 @@ import java.util.Collection;
  */
 public abstract class ImmutableAbstractCollection<E> extends ValidObject
         implements Immutable, Collection<E>, Serializable {
+    private final static long serialVersionUID = -4187794066638697055L;
 
     final Collection<E> internalCollection;
 

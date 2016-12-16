@@ -25,21 +25,51 @@
     <packaging>pom</packaging>
 
     <name>License Manager</name>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <description>
         License Manager - A Java-based licensing tool for licensing commercial applications.
     </description>
-
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>mstaicu</id>
+            <name>Marius Staicu</name>
+            <email>marius.staicu@esolutions.rio</email>
+            <organization>eSolutions Grup</organization>
+            <organizationUrl>http://www.esolutions.ro</organizationUrl>
+            <roles>
+                <role>architect</role>
+            </roles>
+            <timezone>Romania/Bucharest</timezone>
+        </developer>
+        <developer>
+            <id>vborcea</id>
+            <name>Virgil Borcea</name>
+            <email>virgil.borcea@esolutions.rio</email>
+            <organization>eSolutions Grup</organization>
+            <organizationUrl>http://www.esolutions.ro</organizationUrl>
+            <roles>
+                <role>software engineer</role>
+            </roles>
+            <timezone>Romania/Bucharest</timezone>
+        </developer>
+    </developers>
     <modules>
         <module>core</module>
         <module>base</module>
     </modules>
 
-    <url>http://github.com/mariusstaicu/java-license-manager</url>
+    <url>https://github.com/eSolutionsGrup/license-manager</url>
     <scm>
-        <url>http://github.com/mariusstaicu/java-license-manager/</url>
-        <connection>https://github.com/mariusstaicu/java-license-manager.git</connection>
-        <developerConnection>https://github.com/mariusstaicu/java-license-manager.git/</developerConnection>
+        <url>https://github.com/eSolutionsGrup/license-manager/</url>
+        <connection>https://github.com/eSolutionsGrup/license-manager.git</connection>
+        <developerConnection>https://github.com/eSolutionsGrup/license-manager.git/</developerConnection>
     </scm>
 
     <properties>
@@ -54,6 +84,12 @@
         <commons-lang.version>2.4</commons-lang.version>
         <guava.version>20.0</guava.version>
         <asm.version>4.1</asm.version>
+
+        <!-- Plugins-->
+        <maven.gpg.version>1.6</maven.gpg.version>
+        <maven.source.plugin>3.0.1</maven.source.plugin>
+        <!--<maven.javadoc.plugin>2.10.4</maven.javadoc.plugin>-->
+        <maven.javadoc.plugin>2.10.4</maven.javadoc.plugin>
     </properties>
 
     <dependencyManagement>
@@ -91,39 +127,66 @@
     </dependencyManagement>
 
     <distributionManagement>
-        <repository>
-            <id>esol-releases</id>
-            <name>libs-release</name>
-            <url>https://artifactory.esolutions.ro/artifactory/libs-release-local</url>
-        </repository>
         <snapshotRepository>
-            <id>esol-snapshots</id>
-            <name>libs-snapshot</name>
-            <url>https://artifactory.esolutions.ro/artifactory/libs-snapshot-local</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>make-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-            </plugin>
-        </plugins>
-    </build>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven.source.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin}</version>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

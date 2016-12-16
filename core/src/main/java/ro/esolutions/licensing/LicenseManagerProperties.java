@@ -44,8 +44,8 @@ public final class LicenseManagerProperties {
 
     /**
      * Sets the provider of the data for the public key companion to the private key used to sign the license
-     * object.<br />
-     * <br />
+     * object.<br>
+     * <br>
      * This field is <b>required</b>.
      *
      * @param publicKeyDataProvider The provider of the data for the public key companion to the private key used to
@@ -60,8 +60,8 @@ public final class LicenseManagerProperties {
     }
 
     /**
-     * Sets the provider of the password for decrypting the public key.<br />
-     * <br />
+     * Sets the provider of the password for decrypting the public key.<br>
+     * <br>
      * This field is <b>required</b>.
      *
      * @param publicKeyPasswordProvider The provider of the password for decrypting the public key
@@ -75,8 +75,8 @@ public final class LicenseManagerProperties {
     }
 
     /**
-     * Sets the provider of the persisted license data.<br />
-     * <br />
+     * Sets the provider of the persisted license data.<br>
+     * <br>
      * This field is <b>required</b>.
      *
      * @param licenseProvider The provider of the persisted license data
@@ -90,8 +90,8 @@ public final class LicenseManagerProperties {
     }
 
     /**
-     * Sets the provider of the password for the persisted license data.<br />
-     * <br />
+     * Sets the provider of the password for the persisted license data.<br>
+     * <br>
      * This field is <b>optional</b>. If not provided, the
      * {@link #setPublicKeyPasswordProvider(PasswordProvider) publicKeyPasswordProvider} will be used to decrypt
      * licenses.
@@ -109,8 +109,8 @@ public final class LicenseManagerProperties {
     /**
      * Sets the validator implementation that validates all licenses; if null, licenses are assumed to always be valid.
      * If you do not want to validate licenses automatically, you do not need to provide a validator, or you may set
-     * it to null.<br />
-     * <br />
+     * it to null.<br>
+     * <br>
      * This field is <b>optional</b> and defaults to no validation.
      *
      * @param licenseValidator The validator implementation that validates all licenses; if null, licenses are assumed
@@ -126,8 +126,8 @@ public final class LicenseManagerProperties {
 
     /**
      * Sets the length of time in minutes to cache license information (for performance reasons, anything less than 1
-     * minute results in a 10-second cache life; the cache cannot be disabled completely).<br />
-     * <br />
+     * minute results in a 10-second cache life; the cache cannot be disabled completely).<br>
+     * <br>
      * This field is <b>optional</b> and defaults to 10 seconds.
      *
      * @param cacheTimeInMinutes The length of time in minutes to cache license information
