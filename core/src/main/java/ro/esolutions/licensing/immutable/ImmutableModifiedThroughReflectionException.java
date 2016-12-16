@@ -28,7 +28,7 @@ package ro.esolutions.licensing.immutable;
  */
 @SuppressWarnings("unused")
 public class ImmutableModifiedThroughReflectionException extends Error {
-
+    private static final long serialVersionUID = 1L;
     private static final String MESSAGE = "This immutable object appears to have been modified through reflection.";
 
     public ImmutableModifiedThroughReflectionException() {
