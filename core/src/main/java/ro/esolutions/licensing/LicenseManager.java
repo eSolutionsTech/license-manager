@@ -35,15 +35,15 @@ import java.util.Hashtable;
  * should be set in {@link LicenseManagerProperties}. The values in this class will be used to instantiate the license
  * manager. After setting all the necessary properties there, one can retrieve an instance using
  * {@link #getInstance()}. Be sure to set all the properties first; once {@link #getInstance()} is called for the first
- * time, any changes to {@link LicenseManagerProperties} will be ignored.<br />
- * <br />
+ * time, any changes to {@link LicenseManagerProperties} will be ignored.<br>
+ * <br>
  * The license manager maintains a cache of license objects, which cannot be disabled entirely. When initializing the
  * license manager, a maximum cache object age is specified in minutes. If any value less than 1 minute is specified,
  * then the maximum cache object age is set to 10 seconds by default. The advantage of using a longer cache age is
  * increased client application performance, especially with multi-tenant SaaS applications with high load. The
  * disadvantage is decreased security, although that security concern is almost completely mitigated by the presence of
- * the {@link LicenseSecurityManager}.<br />
- * <br />
+ * the {@link LicenseSecurityManager}.<br>
+ * <br>
  * This security manager is one of the most integral pieces to the license manager. It prevents reflection attacks from
  * disabling or compromising the security features in this product. It is instantiated when {@code createInstance} is
  * called and cannot be disabled. For more information on how it works, see the JavaDoc for the
@@ -142,8 +142,8 @@ public final class LicenseManager {
     }
 
     /**
-     * Checks whether the license assigned to the specified context is licensed to use any of the features specified.<br
-     * /> <br /> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
+     * Checks whether the license assigned to the specified context is licensed to use any of the features specified.
+     * <br> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context      The context (account, client, etc.) for which to check the feature(s) against its license
      * @param featureNames The feature (or features) to check against the license
@@ -162,8 +162,8 @@ public final class LicenseManager {
     }
 
     /**
-     * Checks whether the license assigned to the specified context is licensed to use any of the features specified.<br
-     * /> <br /> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
+     * Checks whether the license assigned to the specified context is licensed to use any of the features specified.
+     * <br> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context  The context (account, client, etc.) for which to check the feature(s) against its license
      * @param features The feature (or features) to check against the license
@@ -182,8 +182,8 @@ public final class LicenseManager {
     }
 
     /**
-     * Checks whether the license assigned to the specified context is licensed to use all of the features specified.<br
-     * /> <br /> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
+     * Checks whether the license assigned to the specified context is licensed to use all of the features specified.
+     * <br> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context      The context (account, client, etc.) for which to check the feature(s) against its license
      * @param featureNames The feature (or features) to check against the license
@@ -202,8 +202,8 @@ public final class LicenseManager {
     }
 
     /**
-     * Checks whether the license assigned to the specified context is licensed to use all of the features specified.<br
-     * /> <br /> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
+     * Checks whether the license assigned to the specified context is licensed to use all of the features specified.
+     * <br> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context  The context (account, client, etc.) for which to check the feature(s) against its license
      * @param features The feature (or features) to check against the license
@@ -223,7 +223,7 @@ public final class LicenseManager {
 
     /**
      * Checks whether the license assigned to the specified context is licensed to use the feature(s) in the annotation
-     * value.<br /> <br /> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
+     * <br> Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context    The context (account, client, etc.) for which to check the feature(s) against its license
      * @param annotation The annotation object whose value(s) is(are) the feature(s) to check against the license
@@ -246,8 +246,8 @@ public final class LicenseManager {
 
     /**
      * Checks whether the license assigned to the specified context is licensed to use the feature(s) in the
-     * {@link FeatureRestriction} annotation value, if the target is annotated with that annotation.<br />
-     * <br />
+     * {@link FeatureRestriction} annotation value, if the target is annotated with that annotation.<br>
+     * <br>
      * Throws the same exceptions as {@link #getLicense(Object)} and for the same reasons.
      *
      * @param context The context (account, client, etc.) for which to check the feature(s) against its license
@@ -279,8 +279,8 @@ public final class LicenseManager {
      * become stale (its age has not surpassed the cache time limitation configured for this manager), this returns the
      * cached license. If it has not been cached or the cache is stale, this retrieves the license from the store,
      * decrypts it, deserializes it, checks its signature and, if everything is kosher, caches and returns the
-     * license.<br />
-     * <br />
+     * license.<br>
+     * <br>
      * This method takes precautions to ensure that the cache is not tampered with using reflection. However, it is not
      * infallible. For extra security, one could configure this manager with a 10-second cache (zero cache time limit
      * in minutes), but we highly recommend implementing caching in the license data provider: the signature checking

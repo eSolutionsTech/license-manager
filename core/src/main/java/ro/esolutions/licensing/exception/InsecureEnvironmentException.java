@@ -24,7 +24,6 @@ package ro.esolutions.licensing.exception;
  *
  * @author Nick Williams
  * @version 1.0.0
- * @see ro.esolutions.licensing.LicenseSecurityManager
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
