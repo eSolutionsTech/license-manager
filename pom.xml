@@ -88,7 +88,6 @@
         <!-- Plugins-->
         <maven.gpg.version>1.6</maven.gpg.version>
         <maven.source.plugin>3.0.1</maven.source.plugin>
-        <!--<maven.javadoc.plugin>2.10.4</maven.javadoc.plugin>-->
         <maven.javadoc.plugin>2.10.4</maven.javadoc.plugin>
     </properties>
 
