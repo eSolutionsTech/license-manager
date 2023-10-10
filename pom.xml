@@ -68,8 +68,8 @@
     <url>https://github.com/eSolutionsGrup/license-manager</url>
     <scm>
         <url>https://github.com/eSolutionsGrup/license-manager</url>
-        <connection>https://github.com/eSolutionsGrup/license-manager.git</connection>
-        <developerConnection>https://github.com/eSolutionsGrup/license-manager.git</developerConnection>
+        <connection>scm:git:https://github.com/eSolutionsGrup/license-manager.git</connection>
+        <developerConnection>scm:git:https://github.com/eSolutionsGrup/license-manager.git</developerConnection>
     </scm>
 
     <properties>
