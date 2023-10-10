@@ -52,7 +52,7 @@ import java.util.Hashtable;
  * @author Nick Williams
  * @version 1.0.2
  * @see LicenseSecurityManager
- * @see InsecureEnvironmentException
+ * @see InsecureEnvironmentError
  * @since 1.0.0
  */
 public final class LicenseManager {
@@ -80,7 +80,7 @@ public final class LicenseManager {
         try {
             Class.forName("ro.esolutions.licensing.LicenseSecurityManager");
         } catch (final ClassNotFoundException e) {
-            throw new InsecureEnvironmentException("The class ro.esolutions.licensing.LicenseSecurityManager could not be initialized.", e);
+            throw new InsecureEnvironmentError("The class ro.esolutions.licensing.LicenseSecurityManager could not be initialized.", e);
         }
 
         int cacheTimeInMinutes = LicenseManagerProperties.getCacheTimeInMinutes();
@@ -104,7 +104,7 @@ public final class LicenseManager {
      *                                      licenseProvider}, {@link LicenseManagerProperties#setPublicKeyPasswordProvider(PasswordProvider)
      *                                      publicKeyPasswordProvider} or {@link LicenseManagerProperties#setPublicKeyDataProvider(PublicKeyDataProvider)
      *                                      publicKeyDataProvider} are null.
-     * @throws InsecureEnvironmentException if the {@link LicenseSecurityManager} cannot be instantiated
+     * @throws InsecureEnvironmentError if the {@link LicenseSecurityManager} cannot be instantiated
      * @see LicenseSecurityManager for more information on the security features that protect the license manager
      */
     public static synchronized LicenseManager getInstance() {

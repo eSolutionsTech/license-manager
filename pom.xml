@@ -67,9 +67,9 @@
 
     <url>https://github.com/eSolutionsGrup/license-manager</url>
     <scm>
-        <url>https://github.com/eSolutionsGrup/license-manager/</url>
+        <url>https://github.com/eSolutionsGrup/license-manager</url>
         <connection>https://github.com/eSolutionsGrup/license-manager.git</connection>
-        <developerConnection>https://github.com/eSolutionsGrup/license-manager.git/</developerConnection>
+        <developerConnection>https://github.com/eSolutionsGrup/license-manager.git</developerConnection>
     </scm>
 
     <properties>
@@ -133,7 +133,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
