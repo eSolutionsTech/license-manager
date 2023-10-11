@@ -27,13 +27,13 @@ package ro.esolutions.licensing.exception;
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
-public class InsecureEnvironmentException extends Error {
+public class InsecureEnvironmentError extends Error {
 
-    public InsecureEnvironmentException(final String message,final Throwable cause) {
+    public InsecureEnvironmentError(final String message, final Throwable cause) {
         super("The license manager was activated in an insecure environment. " + message, cause);
     }
 
-    public InsecureEnvironmentException(final SecurityException cause) {
+    public InsecureEnvironmentError(final SecurityException cause) {
         super("The license manager was activated in an insecure environment. A security manager has already been " +
                 "installed, but it allows reflection access to the license cache and doesn't allow a new security " +
                 "manager to be installed.", cause);
